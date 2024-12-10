@@ -1,72 +1,36 @@
-Weather Dashboard
-A simple and interactive weather dashboard that allows users to search for cities and view weather information. The app fetches weather data from the OpenWeather API and displays it in a user-friendly interface. The dashboard allows adding, viewing, and removing weather cards dynamically with smooth animations.
+Angular Weather Dashboard App
+Introduction
+This project is an Angular application that provides weather information for various cities around the world. It includes features for searching cities, displaying current weather data, and showing detailed forecasts.
 
 Features
-Search for cities and get their weather information (temperature, humidity, weather description).
-Add multiple cities to the dashboard and display their weather.
-Remove cities from the list.
-Persistent data using localStorage, so the cities remain even after a page refresh.
-A loading spinner is displayed while data is being fetched.
-Smooth animations for displaying weather cards.
-Error handling for invalid city queries.
-Tech Stack
-Frontend: Angular
-UI Library: PrimeNG, PrimeIcons
-API: OpenWeather API
-CSS: SCSS (Sass)
+City Search: Search for cities by name and view their current weather.
+Current Weather: Display the current temperature, humidity, wind speed, and weather conditions for the selected city.
+Forecast Display: Show weather forecasts for the upcoming days.
 Installation
-To set up the project locally, follow these steps:
-
-Prerequisites
-Ensure you have the following installed on your machine:
-
-Node.js
-npm (Node package manager)
-Steps to Install
 Clone the repository:
 
-bash
 git clone https://github.com/cllown/WeatherDashboard.git
-Navigate into the project directory:
-
-bash
-cd weather-dashboard
+cd WeatherDashboard
 Install dependencies:
 
-Use npm to install the required dependencies:
-
-bash
 npm install
-Configure the OpenWeather API key:
+Running and Building
+Run the application in development mode:
 
-You need to get your own API key from OpenWeather. After obtaining your API key, add it to the WeatherService file in the following line:
-
-typescript
-private apiKey = 'YOUR_API_KEY';
-Start the application:
-
-Run the following command to start the app:
-
-bash
 ng serve
-This will start the development server and the application will be available at http://localhost:4200.
+The application will be available at http://localhost:4200.
 
-Usage
-Once the app is running, you can:
+Build the application for production:
 
-Enter a city name in the input field to search for the city's weather.
-Click the Search button to fetch the weather data.
-The weather details for the selected city will be displayed in a card.
-You can add multiple cities, and they will remain saved (using localStorage).
-If you wish to remove a city, click the Remove button on the city card.
-The application will automatically show a loading spinner while fetching the data and display an error message if the city is not found.
+npm run build
+The build will be created in the dist/ folder.
 
-Screenshots
+Architecture
+The application is built using Angular and follows a modular structure, with key components, services, and models.
 
-Contributing
-Fork the repository.
-Create a new branch for your feature or bugfix (git checkout -b feature-name).
-Commit your changes (git commit -am 'Add new feature').
-Push to the branch (git push origin feature-name).
-Create a pull request.
 
+Libraries and Frameworks
+Angular: The core framework used to build the application.
+PrimeNG: UI component library used for components like p-card, p-dropdown, p-button, etc.
+RxJS: For handling asynchronous operations and managing data streams.
+OpenWeather API: Provides the weather data used in the application.
