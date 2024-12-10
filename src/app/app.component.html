@@ -5,14 +5,10 @@
       pInputText
       placeholder="Enter city name"
       [(ngModel)]="cityName"
-      (input)="onSearch()"
       pInputText
     />
-
-  </div>
-  <div class="page__listbox">
-    <app-listbox [cities]="cities" (citySelected)="onCitySelect($event)"></app-listbox>
+    <p-button (click)="onSearch()">Search</p-button>
   </div>
 
-  <app-card-list [cities]="[selectedCity]" *ngIf="selectedCity"></app-card-list>
+  <app-card-list  [cities]="cities"></app-card-list>
 </div>

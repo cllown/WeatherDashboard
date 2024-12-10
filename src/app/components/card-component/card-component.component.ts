@@ -12,12 +12,10 @@ import { Card } from 'primeng/card';
   styleUrl: './card-component.component.scss',
 })
 export class CardComponentComponent {
-  @Input() city: WeatherResponse | undefined;
+  @Input() city!: WeatherResponse;
   @Output() remove = new EventEmitter<WeatherResponse>();
 
-  removeCard(): void {
-    if (this.city) {
-      this.remove.emit(this.city);
-    }
+  onRemove(): void {
+    this.remove.emit(this.city);
   }
 }

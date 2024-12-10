@@ -1,7 +1,7 @@
 <p-card class="card">
-  <h3>{{ city?.name }}</h3>
-  <p>Temperature: {{ city?.main?.temp ?? 'No temperature available' }}°F</p>
-  <p>Humidity: {{ city?.main?.humidity ?? 'No humidity data' }}%</p>
-  <p>Weather: {{ city?.weather?.[0]?.description ?? 'No description available' }}</p>
-  <p-button (click)="removeCard()">Remove</p-button>
+  <h3>{{ city.name }}</h3>
+  <p>Temperature: {{ city.main.temp  }}°F</p>
+  <p>Humidity: {{ city.main.humidity }}%</p>
+  <p>Weather: {{ city.weather[0].description || 'No description available' }}</p>
+  <p-button (click)="onRemove()">Remove</p-button>
 </p-card>
