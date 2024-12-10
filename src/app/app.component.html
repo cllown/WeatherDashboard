@@ -1,0 +1,9 @@
+<p-listbox
+  [options]="filteredWeather$ | async"
+  [(ngModel)]="selectedCity"
+  optionLabel="Name"
+  [filter]="true"
+  placeholder="Select a city">
+</p-listbox>
+
+<button (click)="loadWeather()">Load Weather</button>

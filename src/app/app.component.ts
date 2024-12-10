@@ -1,41 +1,36 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { map, Observable } from 'rxjs';
-import { WeatherResponse } from './models';
+import { FormsModule } from '@angular/forms';
+import { ListboxModule } from 'primeng/listbox';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+import { WeatherResponse } from './models';
 import { selectWeather } from './store/selectors';
 import * as WeatherActions from './store/actions';
-import { AutoComplete } from 'primeng/autocomplete';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, AutoComplete],
+  imports: [CommonModule, FormsModule, ListboxModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   weather$: Observable<WeatherResponse[]> | undefined;
   filteredWeather$: Observable<WeatherResponse[]>;
-  cityName: string = '';
+  selectedCity: WeatherResponse | null = null;
 
   constructor(private store: Store) {
     this.filteredWeather$ = this.store
       .select(selectWeather)
-      .pipe(
-        map((weather) =>
-          weather.filter((city) =>
-            city.name.toLowerCase().includes(this.cityName.toLowerCase())
-          )
-        )
-      );
+      .pipe(map((weather) => (weather ? weather : [])));
   }
 
   loadWeather() {
-    if (this.cityName) {
+    if (this.selectedCity) {
       this.store.dispatch(
-        WeatherActions.loadWeather({ cityName: this.cityName })
+        WeatherActions.loadWeather({ cityName: this.selectedCity.name })
       );
     }
   }

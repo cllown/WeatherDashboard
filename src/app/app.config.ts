@@ -9,6 +9,9 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { weatherReducer } from './store/reducer';
 import { WeatherEffects } from './store/effects';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,5 +21,11 @@ export const appConfig: ApplicationConfig = {
     provideStore({ movieState: weatherReducer }),
     provideEffects([WeatherEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+      },
+    }),
   ],
 };
