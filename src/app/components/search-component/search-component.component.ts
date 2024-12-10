@@ -5,9 +5,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-search-component',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './search-component.component.html',
-  styleUrl: './search-component.component.scss'
+  styleUrl: './search-component.component.scss',
 })
 export class SearchComponentComponent {
   cityName: string = '';

@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './loading-spinner-component.component.html',
-  styleUrl: './loading-spinner-component.component.scss'
+  styleUrl: './loading-spinner-component.component.scss',
 })
-export class LoadingSpinnerComponentComponent {
-
-}
+export class LoadingSpinnerComponentComponent {}

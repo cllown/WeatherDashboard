@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card-component.component.html',
-  styleUrl: './card-component.component.scss'
+  styleUrl: './card-component.component.scss',
 })
 export class CardComponentComponent {
   @Input() weather: any;

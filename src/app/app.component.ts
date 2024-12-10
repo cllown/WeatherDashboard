@@ -1,36 +1,42 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CardComponentComponent } from './components/card-component/card-component.component';
-import { SearchComponentComponent } from './components/search-component/search-component.component';
-import { WeatherService } from './services/Weather.service';
 import { CommonModule } from '@angular/common';
+import { map, Observable } from 'rxjs';
+import { WeatherResponse } from './models';
+import { Store } from '@ngrx/store';
+import { selectWeather } from './store/selectors';
+import * as WeatherActions from './store/actions';
+import { AutoComplete } from 'primeng/autocomplete';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CardComponentComponent, SearchComponentComponent, CommonModule],
+  imports: [CommonModule, AutoComplete],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  weatherData: any[] = [];
-  loading: boolean = false;
+  weather$: Observable<WeatherResponse[]> | undefined;
+  filteredWeather$: Observable<WeatherResponse[]>;
+  cityName: string = '';
 
-  constructor(private weatherService: WeatherService) {}
-
-  onCityAdded(city: string): void {
-    this.loading = true;
-    this.weatherService.getWeather(city).subscribe((data) => {
-      this.loading = false;
-      if (data) {
-        this.weatherData.push(data);
-      } else {
-        alert('City not found');
-      }
-    });
+  constructor(private store: Store) {
+    this.filteredWeather$ = this.store
+      .select(selectWeather)
+      .pipe(
+        map((weather) =>
+          weather.filter((city) =>
+            city.name.toLowerCase().includes(this.cityName.toLowerCase())
+          )
+        )
+      );
   }
 
-  onCityRemoved(city: string): void {
-    this.weatherData = this.weatherData.filter((w) => w.city !== city);
+  loadWeather() {
+    if (this.cityName) {
+      this.store.dispatch(
+        WeatherActions.loadWeather({ cityName: this.cityName })
+      );
+    }
   }
 }

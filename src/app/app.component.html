@@ -1,8 +1,0 @@
-<app-search-component (cityAdded)="onCityAdded($event)"></app-search-component>
-<div *ngIf="loading" class="loading-spinner"></div>
-<div *ngFor="let weather of weatherData">
-  <app-card-component
-    [weather]="weather"
-    (cityRemoved)="onCityRemoved($event)">
-  </app-card-component>
-</div>
