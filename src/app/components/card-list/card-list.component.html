@@ -1,0 +1,5 @@
+<div class="card-container">
+  <div *ngFor="let city of cities" class="card">
+    <app-card-component [city]="city" (remove)="removeCard(city)"></app-card-component>
+  </div>
+</div>

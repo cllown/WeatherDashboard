@@ -1,37 +1,48 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ListboxModule } from 'primeng/listbox';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
 import { WeatherResponse } from './models';
-import { selectWeather } from './store/selectors';
-import * as WeatherActions from './store/actions';
+import { WeatherService } from './services/Weather.service';
+import { CardListComponent } from './components/card-list/card-list.component';
+import { ListboxComponent } from './components/listbox/listbox.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, ListboxModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CardListComponent,
+    ListboxComponent,
+    InputTextModule,
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  weather$: Observable<WeatherResponse[]> | undefined;
-  filteredWeather$: Observable<WeatherResponse[]>;
+  cityName: string = '';
+  cities: WeatherResponse[] = [];
   selectedCity: WeatherResponse | null = null;
+  constructor(private weatherService: WeatherService) {}
 
-  constructor(private store: Store) {
-    this.filteredWeather$ = this.store
-      .select(selectWeather)
-      .pipe(map((weather) => (weather ? weather : [])));
-  }
+  ngOnInit(): void {}
 
-  loadWeather() {
-    if (this.selectedCity) {
-      this.store.dispatch(
-        WeatherActions.loadWeather({ cityName: this.selectedCity.name })
+  onSearch(): void {
+    if (this.cityName.trim()) {
+      this.weatherService.getWeather(this.cityName).subscribe(
+        (response) => {
+          this.cities = [response];
+        },
+        (error) => {
+          console.error('Error fetching weather data:', error);
+        }
       );
     }
+  }
+
+  onCitySelect(city: WeatherResponse): void {
+    this.selectedCity = city;
+    console.log('Selected city:', city);
   }
 }

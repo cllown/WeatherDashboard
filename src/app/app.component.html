@@ -1,9 +1,18 @@
-<p-listbox
-  [options]="filteredWeather$ | async"
-  [(ngModel)]="selectedCity"
-  optionLabel="Name"
-  [filter]="true"
-  placeholder="Select a city">
-</p-listbox>
+<div class="page-wrapper">
+  <div class="page__card">
+    <input
+      type="text"
+      pInputText
+      placeholder="Enter city name"
+      [(ngModel)]="cityName"
+      (input)="onSearch()"
+      pInputText
+    />
 
-<button (click)="loadWeather()">Load Weather</button>
+  </div>
+  <div class="page__listbox">
+    <app-listbox [cities]="cities" (citySelected)="onCitySelect($event)"></app-listbox>
+  </div>
+
+  <app-card-list [cities]="[selectedCity]" *ngIf="selectedCity"></app-card-list>
+</div>

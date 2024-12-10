@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:&display=swap");
+.page-wrapper{
+  font-family: Roboto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15%;
+  flex-direction: column;
+}
+.page{
+
+  &__listbox{
+    max-width: 300px;
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+}
