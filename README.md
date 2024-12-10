@@ -17,6 +17,9 @@ npm install
 Running and Building
 Run the application in development mode:
 
+npm install primeng primeicons @primeng/themes
+installing UI component library
+
 ng serve
 The application will be available at http://localhost:4200.
 
