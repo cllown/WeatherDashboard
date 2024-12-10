@@ -26,7 +26,7 @@ Steps to Install
 Clone the repository:
 
 bash
-git clone https://github.com/your-username/weather-dashboard.git
+git clone https://github.com/cllown/WeatherDashboard.git
 Navigate into the project directory:
 
 bash
