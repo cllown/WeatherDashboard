@@ -50,7 +50,7 @@ export interface Clouds {
 }
 
 export interface Precipitation {
-  "1h"?: number;
+  '1h'?: number;
 }
 
 export interface SystemInfo {

@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { WeatherResponse } from './models';
 import { WeatherService } from './services/Weather.service';
 import { CardListComponent } from './components/card-list/card-list.component';
-import { ListboxComponent } from './components/listbox/listbox.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +15,9 @@ import { ButtonModule } from 'primeng/button';
     CommonModule,
     FormsModule,
     CardListComponent,
-    ListboxComponent,
     InputTextModule,
     ButtonModule,
+    ProgressSpinnerModule,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -26,6 +26,8 @@ export class AppComponent {
   cityName: string = '';
   cities: WeatherResponse[] = [];
   selectedCity: WeatherResponse | null = null;
+  isLoading: boolean = false;
+  errorMessage: string = '';
 
   constructor(private weatherService: WeatherService) {
     this.loadCities();
@@ -44,8 +46,12 @@ export class AppComponent {
       return;
     }
 
+    this.isLoading = true;
+    this.errorMessage = '';
+
     this.weatherService.getWeather(this.cityName).subscribe(
       (data) => {
+        this.isLoading = false;
         if (this.cities.some((city) => city.name === data.name)) {
           alert('City is already added!');
         } else {
@@ -54,7 +60,13 @@ export class AppComponent {
         }
       },
       (error) => {
-        console.error('Error fetching weather data', error);
+        this.isLoading = false;
+        if (error.status === 404) {
+          this.errorMessage = 'City not found! Please try again.';
+        } else {
+          console.error('Error fetching weather data', error);
+          this.errorMessage = 'An error occurred. Please try again later.';
+        }
       }
     );
   }

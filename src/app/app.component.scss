@@ -8,4 +8,9 @@
   flex-direction: column;
   gap: 30px;
 }
+.page{
+  &__icon{
+    padding-right: 10px;
+  }
+}
 

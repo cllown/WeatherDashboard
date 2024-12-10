@@ -1,14 +1,18 @@
 <div class="page-wrapper">
   <div class="page__card">
+    <span class="page__icon">
+      <i class="pi pi-cloud"></i>
+    </span>
     <input
       type="text"
       pInputText
       placeholder="Enter city name"
       [(ngModel)]="cityName"
-      pInputText
+      class="pi pi-cloud"
     />
     <p-button (click)="onSearch()">Search</p-button>
   </div>
-
+  <p-progress-spinner *ngIf="isLoading" styleClass="spinner"></p-progress-spinner>
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
   <app-card-list  [cities]="cities"></app-card-list>
 </div>
