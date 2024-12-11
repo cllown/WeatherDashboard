@@ -1,6 +1,6 @@
 <p-card class="card">
   <h3>{{ city.name }}</h3>
-  <p>Temperature: {{ city.main.temp  }}°F</p>
+  <p>Temperature: {{ (city.main.temp - 273) | number:'1.0-0' }}°С</p>
   <p>Humidity: {{ city.main.humidity }}%</p>
   <p>Weather: {{ city.weather[0].description || 'No description available' }}</p>
   <p-button (click)="onRemove()">Remove</p-button>
